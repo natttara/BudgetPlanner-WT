@@ -1,0 +1,22 @@
+{
+  "name": "budgetplanner",
+  "version": "1.0.0",
+  "description": "Budget Planner App",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "http-server -c-1",
+    "build": "echo 'Build not required without Parcel'",
+    "dev": "npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "firebase": "^10.14.1"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
