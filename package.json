@@ -4,11 +4,15 @@
   "description": "Budget Planner App",
   "type": "module",
   "homepage": "https://natttara.github.io/BudgetPlanner-WT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natttara/BudgetPlanner-WT.git"
+  },
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html --dist-dir docs",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d docs",
+    "deploy": "gh-pages -d docs -r https://github.com/natttara/BudgetPlanner-WT.git",
     "dev": "parcel serve index.html",
     "lint": "eslint ."
   },

@@ -710,7 +710,7 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.register(sw.href, {
 // Initialize App
 renderTransactions();
 
-},{"firebase/firestore":"8A4BC","a9f901fea61c26ef":"72bEf","./firebase.js":"dBiHI"}],"72bEf":[function(require,module,exports,__globalThis) {
+},{"./firebase.js":"dBiHI","firebase/firestore":"8A4BC","a9f901fea61c26ef":"72bEf"}],"72bEf":[function(require,module,exports,__globalThis) {
 module.exports = require("9e9febe71fd0c8b8").getBundleURL('1G2bZ') + "service-worker.75769289.js" + "?" + Date.now();
 
 },{"9e9febe71fd0c8b8":"lgJ39"}],"lgJ39":[function(require,module,exports,__globalThis) {

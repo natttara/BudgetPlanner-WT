@@ -615,37 +615,7 @@ const firebaseConfig = {
 const app = (0, _app.getApps)().length ? (0, _app.getApp)() : (0, _app.initializeApp)(firebaseConfig);
 const db = (0, _firestore.getFirestore)(app);
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","firebase/app":"aM3Fo","firebase/firestore":"8A4BC"}],"gkKU3":[function(require,module,exports,__globalThis) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"aM3Fo":[function(require,module,exports,__globalThis) {
+},{"firebase/app":"aM3Fo","firebase/firestore":"8A4BC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aM3Fo":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _app = require("@firebase/app");
@@ -3978,6 +3948,36 @@ process.chdir = function(dir) {
 };
 process.umask = function() {
     return 0;
+};
+
+},{}],"gkKU3":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
 };
 
 },{}],"fZmft":[function(require,module,exports,__globalThis) {
