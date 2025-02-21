@@ -1,0 +1,183 @@
+body {
+  text-align: center;
+  color: #333;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #fff;
+  background-color: #f78a54;
+  padding: 10px;
+}
+
+.container {
+  background: #fff;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 0 10px #0000001a;
+}
+
+input, select, button {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+}
+
+button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #f78a54;
+  border: none;
+}
+
+button:hover {
+  background-color: #e42b2b;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  justify-content: space-between;
+  margin: 5px 0;
+  padding: 10px;
+  display: flex;
+}
+
+#summary {
+  background-color: #e9ecef;
+  border-radius: 5px;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+#transactionForm {
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  display: grid;
+  box-shadow: 0 2px 5px #0000001a;
+}
+
+#description {
+  grid-column: span 2;
+}
+
+#transactionForm button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #fc9b6a;
+  border: none;
+  grid-column: span 2;
+  transition: background-color .3s;
+}
+
+#transactionForm button:hover {
+  background-color: #468128;
+}
+
+#summary {
+  background-color: #e9ecef;
+  border-radius: 8px;
+  margin: 20px 0;
+  padding: 10px;
+  box-shadow: 0 2px 5px #0000001a;
+}
+
+#summary p {
+  margin: 5px 0;
+  font-size: 20px;
+}
+
+#transactionList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#transactionList li {
+  padding: 15x;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  display: flex;
+}
+
+#transactionList button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.transaction-details {
+  color: #333;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1em;
+  display: flex;
+}
+
+.transaction-actions {
+  gap: 10px;
+  display: flex;
+}
+
+.transaction-actions button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 12px;
+  font-size: .9em;
+  transition: background-color .3s;
+}
+
+.edit-btn {
+  color: #fff;
+  background-color: #fc9b6a;
+}
+
+.edit-btn:hover {
+  background-color: #468128;
+}
+
+.delete-btn {
+  color: #fff;
+  background-color: #ff142c;
+}
+
+.delete-btn:hover {
+  background-color: #1b1fe8;
+}
+
+@media (width <= 600px) {
+  #transactionList li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .transaction-actions {
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+/*# sourceMappingURL=index.3a01df49.css.map */

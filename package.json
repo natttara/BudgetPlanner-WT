@@ -3,17 +3,27 @@
   "version": "1.0.0",
   "description": "Budget Planner App",
   "type": "module",
-  "main": "app.js",
   "scripts": {
-    "start": "http-server -c-1",
-    "build": "echo 'Build not required without Parcel'",
-    "dev": "npm start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir docs",
+    "dev": "parcel serve index.html",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "firebase": "^10.14.1"
+    "firebase": "^11.2.0",
+    "firebase-admin": "^13.1.0",
+    "gh-pages": "^6.3.0",
+    "loglevel": "^1.9.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@parcel/packager-raw-url": "^2.13.3",
+    "@parcel/transformer-webmanifest": "^2.13.3",
+    "buffer": "^6.0.3",
+    "eslint": "^9.20.1",
+    "eslint-plugin-react": "^7.37.4",
+    "globals": "^16.0.0",
+    "parcel": "^2.13.3",
     "process": "^0.11.10"
   },
   "keywords": [],
