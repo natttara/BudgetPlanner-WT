@@ -607,7 +607,7 @@ const transactionList = document.getElementById('transactionList');
 const totalIncome = document.getElementById('totalIncome');
 const totalExpenses = document.getElementById('totalExpenses');
 const balance = document.getElementById('balance');
-// 🚀 Add Transaction
+// Add Transaction
 form.addEventListener('submit', async (e)=>{
     e.preventDefault();
     const description = sanitizeInput(descriptionInput.value);
@@ -682,10 +682,18 @@ async function updateTransaction(id, description, amount, category) {
 }
 // Fetch All Transactions (getDocs)
 async function fetchAllTransactions() {
-    const querySnapshot = await (0, _firestore.getDocs)((0, _firestore.collection)((0, _firebaseJs.db), 'transactions'));
-    querySnapshot.forEach((doc)=>{
-        console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-    });
+    try {
+        const querySnapshot = await (0, _firestore.getDocs)((0, _firestore.collection)((0, _firebaseJs.db), 'transactions'));
+        if (querySnapshot.empty) {
+            console.log("No transactions found.");
+            return;
+        }
+        querySnapshot.forEach((doc)=>{
+            console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
+        });
+    } catch (error) {
+        console.error("Error fetching transactions: ", error);
+    }
 }
 // Delete Transaction
 window.deleteTransaction = async (id)=>{
@@ -702,7 +710,7 @@ function sanitizeInput(input) {
     div.textContent = input;
     return div.innerHTML.trim();
 }
-// ⚙️ Service Worker Registration
+// Service Worker Registration
 const sw = new URL(require("a9f901fea61c26ef"));
 if ('serviceWorker' in navigator) navigator.serviceWorker.register(sw.href, {
     scope: '/BudgetPlanner-WT/'

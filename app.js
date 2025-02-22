@@ -11,7 +11,7 @@ const totalIncome = document.getElementById('totalIncome');
 const totalExpenses = document.getElementById('totalExpenses');
 const balance = document.getElementById('balance');
 
-// 🚀 Add Transaction
+// Add Transaction
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -111,10 +111,20 @@ async function updateTransaction(id, description, amount, category) {
 
 // Fetch All Transactions (getDocs)
 async function fetchAllTransactions() {
-    const querySnapshot = await getDocs(collection(db, 'transactions'));
-    querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-    });
+    try {
+        const querySnapshot = await getDocs(collection(db, 'transactions'));
+        if (querySnapshot.empty) {
+            console.log("No transactions found.");
+            return;
+        }
+
+        querySnapshot.forEach((doc) => {
+            console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
+        });
+
+    } catch (error) {
+        console.error("Error fetching transactions: ", error);
+    }
 }
 
 // Delete Transaction
@@ -136,7 +146,7 @@ function sanitizeInput(input) {
     return div.innerHTML.trim();
 }
 
-// ⚙️ Service Worker Registration
+// Service Worker Registration
 const sw = new URL('service-worker.js', import.meta.url);
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register(sw.href, { scope: '/BudgetPlanner-WT/' })
