@@ -9,15 +9,15 @@
     "url": "git+https://github.com/natttara/BudgetPlanner-WT.git"
   },
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html --dist-dir docs --public-url ./",
-    "build-pages": "parcel build --dist-dir docs --public-url /BudgetPlanner-WT/ src/*.html",
+    "start": "parcel serve assets/html/index.html",
+    "dev": "parcel serve assets/html/index.html",
+    "build": "parcel build assets/html/index.html --dist-dir docs --public-url ./",
+    "build-pages": "parcel build assets/html/index.html --dist-dir docs --public-url /BudgetPlanner-WT/",
     "dev:build": "parcel build --dist-dir docs --no-content-hash assets/html/*.html",
     "dev:run": "npm run dev:build && npm run dev:start",
     "dev:start": "parcel serve --dist-dir docs assets/html/*.html",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d docs",
-    "dev": "parcel serve index.html",
     "lint": "eslint ."
   },
   "dependencies": {
