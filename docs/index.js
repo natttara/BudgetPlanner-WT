@@ -10,16 +10,22 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         console.log("User logged in:", user.email);
         // Detect if running on GitHub Pages or locally
-        const isProduction = window.location.hostname !== "localhost";
-
-        const redirectURL = isProduction ? "/BudgetPlanner-WT/app.html" : "app.html";
+        // const isProduction = window.location.hostname !== "localhost";
+        // const redirectURL = isProduction ? "/BudgetPlanner-WT/app.html" : "app.html";
         // window.location.href = redirectURL;
 
-        console.log("Redirecting to:", redirectURL);
-        window.location.assign(redirectURL);
-        
-       
-    }
+        // console.log("Redirecting to:", redirectURL);
+        // window.location.assign(redirectURL);
+        if (window.location.pathname.includes("index.html")) {
+            window.location.href = "app.html";
+        }
+    } else {
+        console.log("No user detected.");
+
+        if (window.location.pathname.includes("app.html")) {
+            window.location.href = "index.html";
+        }
+}
 });
 
 // Sign Up User
