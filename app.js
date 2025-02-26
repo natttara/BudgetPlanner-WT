@@ -1,5 +1,7 @@
 import { db } from './firebase.js';
 import { collection, addDoc, updateDoc, getDocs, deleteDoc, doc, onSnapshot } from 'firebase/firestore';
+import { getAuthCode } from "./firestore";
+import { processMessage } from "./chatAI";
 
 // Form elements
 const form = document.getElementById('transactionForm');
@@ -153,6 +155,55 @@ if ('serviceWorker' in navigator) {
         .then(() => console.log('Service Worker Registered'))
         .catch((err) => console.error('Service Worker Error:', err));
 }
+
+async function fetchAuthCode() {
+    const authCode = await getAuthCode();
+    if (authCode) {
+      console.log("Fetched Auth Code:", authCode);
+    } else {
+      console.log("Failed to fetch the auth code.");
+    }
+  }
+  
+fetchAuthCode();
+
+// chatAI
+document.addEventListener("DOMContentLoaded", async () => {
+    const aiButton = document.getElementById("send-btn");
+    const aiInput = document.getElementById("chat-input");
+    const chatHistory = document.getElementById("chat-history");
+  
+    function appendMessage(text, isAI) {
+      const message = document.createElement("div");
+      message.textContent = isAI ? " 🤖 " + text : "🧑 " + text;
+      message.className = `chat-message ${isAI ? "ai" : "user"}`;
+      chatHistory.appendChild(message);
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+  
+    async function submit() {
+      const message = aiInput.value.trim();
+      if (message.length === 0) return;
+  
+      appendMessage(message, false);
+      aiInput.value = "...";
+      aiInput.disabled = true;
+  
+      const response = await processMessage(message);
+      aiInput.value = "";
+      aiInput.disabled = false;
+  
+      appendMessage(response, true);
+      aiInput.focus();
+    }
+  
+    aiButton.addEventListener("click", submit);
+    aiInput.addEventListener("keypress", (event) => {
+      if (event.key === "Enter") submit();
+    });
+  
+    appendMessage("Hello! How can I assist you with budgeting today?", true);
+  });
 
 // Initialize App
 renderTransactions();
