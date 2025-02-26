@@ -4,7 +4,7 @@ import { getAuthCode } from "./firestore.js";
 import { processMessage } from "./chatAI.js";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 
-// 🔹 **Redirect to login page if user is NOT logged in**
+
 onAuthStateChanged(auth, (user) => {
     if (!user) {
         console.warn("No user detected. Redirecting to login...");

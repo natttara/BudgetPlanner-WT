@@ -5,48 +5,51 @@ import {
   onAuthStateChanged
 } from 'firebase/auth';
 
-// 🔹 Redirect user if already logged in
+// if already logged in
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        console.log("✅ User logged in:", user.email);
+        console.log("User logged in:", user.email);
         // Detect if running on GitHub Pages or locally
         const isProduction = window.location.hostname !== "localhost";
+
         const redirectURL = isProduction ? "/BudgetPlanner-WT/app.html" : "app.html";
+        // window.location.href = redirectURL;
+
+        console.log("Redirecting to:", redirectURL);
+        window.location.assign(redirectURL);
         
-        window.location.href = redirectURL;
+       
     }
 });
 
-// 🔹 Sign Up User
+// Sign Up User
 window.signUpUser = async function () {
     const email = document.getElementById('signupEmail').value;
     const password = document.getElementById('signupPassword').value;
 
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        console.log("✅ Sign up successful!", userCredential.user);
-        
-        // Redirect to app.html after signup
+        console.log("Sign up successful!", userCredential.user);
         window.location.href = "app.html"; 
+        
     } catch (error) {
-        console.error("🔥 Sign-up error:", error);
+        console.error("Sign-up error:", error);
         alert(`Error: ${error.message}`);
     }
 };
 
-// 🔹 Login User
+// Login User
 window.loginUser = async function () {
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
 
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log("✅ Login successful!", userCredential.user);
-
-        // Redirect to app.html after login
+        console.log("Login successful!", userCredential.user);
+        alert('Login successful!');
         window.location.href = "app.html"; 
     } catch (error) {
-        console.error("🔥 Login error:", error);
+        console.error("Login error:", error);
         alert(`Error: ${error.message}`);
     }
 };

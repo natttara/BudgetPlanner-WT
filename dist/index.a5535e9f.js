@@ -598,41 +598,42 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 },{}],"1E7ZB":[function(require,module,exports,__globalThis) {
 var _firebaseJs = require("./firebase.js");
 var _auth = require("firebase/auth");
-// 🔹 Redirect user if already logged in
+// if already logged in
 (0, _auth.onAuthStateChanged)((0, _firebaseJs.auth), (user)=>{
     if (user) {
-        console.log("\u2705 User logged in:", user.email);
+        console.log("User logged in:", user.email);
         // Detect if running on GitHub Pages or locally
         const isProduction = window.location.hostname !== "localhost";
         const redirectURL = isProduction ? "/BudgetPlanner-WT/app.html" : "app.html";
-        window.location.href = redirectURL;
+        // window.location.href = redirectURL;
+        console.log("Redirecting to:", redirectURL);
+        window.location.assign(redirectURL);
     }
 });
-// 🔹 Sign Up User
+// Sign Up User
 window.signUpUser = async function() {
     const email = document.getElementById('signupEmail').value;
     const password = document.getElementById('signupPassword').value;
     try {
         const userCredential = await (0, _auth.createUserWithEmailAndPassword)((0, _firebaseJs.auth), email, password);
-        console.log("\u2705 Sign up successful!", userCredential.user);
-        // Redirect to app.html after signup
+        console.log("Sign up successful!", userCredential.user);
         window.location.href = "app.html";
     } catch (error) {
-        console.error("\uD83D\uDD25 Sign-up error:", error);
+        console.error("Sign-up error:", error);
         alert(`Error: ${error.message}`);
     }
 };
-// 🔹 Login User
+// Login User
 window.loginUser = async function() {
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
     try {
         const userCredential = await (0, _auth.signInWithEmailAndPassword)((0, _firebaseJs.auth), email, password);
-        console.log("\u2705 Login successful!", userCredential.user);
-        // Redirect to app.html after login
+        console.log("Login successful!", userCredential.user);
+        alert('Login successful!');
         window.location.href = "app.html";
     } catch (error) {
-        console.error("\uD83D\uDD25 Login error:", error);
+        console.error("Login error:", error);
         alert(`Error: ${error.message}`);
     }
 };
@@ -672,7 +673,7 @@ const firebaseConfig = {
     appId: "1:911434227812:web:5dd9ff27da4f934ef77f71"
 };
 const app = (0, _app.initializeApp)(firebaseConfig);
-const auth = (0, _auth.getAuth)();
+const auth = (0, _auth.getAuth)(app);
 const db = (0, _firestore.getFirestore)(app);
 const analytics = (0, _analytics.getAnalytics)(app);
 async function getAuthCode() {
@@ -686,6 +687,16 @@ async function getAuthCode() {
         return null;
     }
 }
+// 🔹 Automatically Redirect on Auth State Change
+(0, _auth.onAuthStateChanged)(auth, (user)=>{
+    if (user) {
+        console.log("User logged in:", user.email);
+        if (window.location.pathname.includes("index.html")) window.location.href = "app.html"; // Redirect only if on login/signup page
+    } else {
+        console.log("No user detected.");
+        if (window.location.pathname.includes("app.html")) window.location.href = "index.html"; // Redirect back to login if not authenticated
+    }
+});
 let genAI = null;
 let model = null;
 async function getApiKey() {

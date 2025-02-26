@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 import { GoogleGenerativeAI } from "@google/generative-ai"; 
@@ -14,7 +14,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth();
+export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const analytics = getAnalytics(app);
 
@@ -31,6 +31,20 @@ export async function getAuthCode() {
     return null;
   }
 }
+// 🔹 Automatically Redirect on Auth State Change
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("User logged in:", user.email);
+      if (window.location.pathname.includes("index.html")) {
+        window.location.href = "app.html"; // Redirect only if on login/signup page
+      }
+    } else {
+      console.log("No user detected.");
+      if (window.location.pathname.includes("app.html")) {
+        window.location.href = "index.html"; // Redirect back to login if not authenticated
+      }
+    }
+  });
 
 let genAI = null;
 let model = null;
