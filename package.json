@@ -10,8 +10,8 @@
   },
   "scripts": {
     "start": "parcel serve assets/html/index.html",
-    "dev": "parcel serve assets/html/index.html",
     "build": "parcel build assets/html/index.html --dist-dir docs --public-url ./",
+    "dev": "parcel serve assets/html/index.html",
     "build-pages": "parcel build assets/html/index.html --dist-dir docs --public-url /BudgetPlanner-WT/",
     "dev:build": "parcel build --dist-dir docs --no-content-hash assets/html/*.html",
     "dev:run": "npm run dev:build && npm run dev:start",

@@ -1,5 +1,5 @@
 import { db, auth } from './firebase.js';
-import { collection, addDoc, updateDoc, getDocs, deleteDoc, doc, onSnapshot } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot } from 'firebase/firestore';
 import { getAuthCode } from "./firestore.js";
 import { processMessage } from "./chatAI.js";
 import { signOut, onAuthStateChanged } from "firebase/auth";
@@ -19,7 +19,7 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// 🔹 **Logout User**
+// **Logout User**
 window.logoutUser = async function () {
     try {
         await signOut(auth);
@@ -33,7 +33,7 @@ window.logoutUser = async function () {
     }
 };
 
-// 🔹 **Form elements**
+// **Form elements**
 const form = document.getElementById('transactionForm');
 const descriptionInput = document.getElementById('description');
 const amountInput = document.getElementById('amount');
@@ -43,7 +43,7 @@ const totalIncome = document.getElementById('totalIncome');
 const totalExpenses = document.getElementById('totalExpenses');
 const balance = document.getElementById('balance');
 
-// 🔹 **Add Transaction**
+// **Add Transaction**
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -70,7 +70,7 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
-// 🔹 **Render Transactions**
+// **Render Transactions**
 function renderTransactions() {
     onSnapshot(collection(db, 'transactions'), (snapshot) => {
         let income = 0;
@@ -111,7 +111,7 @@ function renderTransactions() {
     });
 }
 
-// 🔹 **Edit Transaction**
+// **Edit Transaction**
 window.editTransaction = (id, description, amount, category) => {
     const newDescription = prompt("Edit description:", description);
     const newAmount = parseFloat(prompt("Edit amount:", amount));
@@ -124,7 +124,7 @@ window.editTransaction = (id, description, amount, category) => {
     }
 };
 
-// 🔹 **Update Transaction**
+// **Update Transaction**
 async function updateTransaction(id, description, amount, category) {
     const transactionRef = doc(db, 'transactions', id);
 
@@ -142,7 +142,7 @@ async function updateTransaction(id, description, amount, category) {
     }
 }
 
-// 🔹 **Delete Transaction**
+// **Delete Transaction**
 window.deleteTransaction = async (id) => {
     if (confirm("Are you sure you want to delete this transaction?")) {
         try {
@@ -154,14 +154,14 @@ window.deleteTransaction = async (id) => {
     }
 };
 
-// 🔹 **Sanitize Input**
+// **Sanitize Input**
 function sanitizeInput(input) {
     const div = document.createElement("div");
     div.textContent = input;
     return div.innerHTML.trim();
 }
 
-// 🔹 **Fetch Authentication Code**
+// **Fetch Authentication Code**
 async function fetchAuthCode() {
     const authCode = await getAuthCode();
     if (authCode) {
@@ -172,7 +172,7 @@ async function fetchAuthCode() {
 }
 fetchAuthCode();
 
-// 🔹 **Chatbot Integration**
+// **Chatbot Integration**
 document.addEventListener("DOMContentLoaded", async () => {
     const aiButton = document.getElementById("send-btn");
     const aiInput = document.getElementById("chat-input");
@@ -210,5 +210,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     appendMessage("Hello! How can I assist you with budgeting today?", true);
 });
 
-// 🔹 **Initialize App**
+// **Initialize App**
 renderTransactions();

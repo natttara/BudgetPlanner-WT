@@ -600,6 +600,7 @@ var _firebaseJs = require("./firebase.js");
 var _auth = require("firebase/auth");
 // if already logged in
 (0, _auth.onAuthStateChanged)((0, _firebaseJs.auth), (user)=>{
+    console.log("Current Path:", window.location.pathname);
     if (user) {
         console.log("User logged in:", user.email);
         // Detect if running on GitHub Pages or locally
@@ -607,8 +608,13 @@ var _auth = require("firebase/auth");
         const redirectURL = isProduction ? "/BudgetPlanner-WT/app.html" : "app.html";
         // window.location.href = redirectURL;
         console.log("Redirecting to:", redirectURL);
-        window.location.assign(redirectURL);
-    }
+        // window.location.assign(redirectURL);
+        // if (window.location.pathname.includes("index.html")) {
+        // console.log("Redirecting to app.html...");
+        //     window.location.href = "app.html";
+        // }
+        if (window.location.pathname.includes("index.html") || window.location.pathname === "/") window.location.href = redirectURL;
+    } else console.log("No user detected.");
 });
 // Sign Up User
 window.signUpUser = async function() {
@@ -617,7 +623,8 @@ window.signUpUser = async function() {
     try {
         const userCredential = await (0, _auth.createUserWithEmailAndPassword)((0, _firebaseJs.auth), email, password);
         console.log("Sign up successful!", userCredential.user);
-        window.location.href = "app.html";
+        // window.location.href = "app.html"; 
+        window.location.replace("app.html");
     } catch (error) {
         console.error("Sign-up error:", error);
         alert(`Error: ${error.message}`);
@@ -631,13 +638,14 @@ window.loginUser = async function() {
         const userCredential = await (0, _auth.signInWithEmailAndPassword)((0, _firebaseJs.auth), email, password);
         console.log("Login successful!", userCredential.user);
         alert('Login successful!');
-        window.location.href = "app.html";
+        // window.location.href = "app.html"; 
+        window.location.replace("app.html");
     } catch (error) {
         console.error("Login error:", error);
         alert(`Error: ${error.message}`);
     }
 };
-// 🔹 Toggle Login and Sign Up Pages
+// Toggle Login and Sign Up Pages
 window.showLogin = function() {
     document.getElementById('signupPage').style.display = 'none';
     document.getElementById('loginPage').style.display = 'block';
