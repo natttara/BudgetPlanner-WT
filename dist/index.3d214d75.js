@@ -598,40 +598,45 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 },{}],"bB7Pu":[function(require,module,exports,__globalThis) {
 var _firebaseJs = require("./firebase.js");
 var _auth = require("firebase/auth");
-// Redirect user if already logged in
+// 🔹 Redirect user if already logged in
 (0, _auth.onAuthStateChanged)((0, _firebaseJs.auth), (user)=>{
-    console.log(user);
     if (user) {
+        console.log("\u2705 User logged in:", user.email);
+        // Detect if running on GitHub Pages or locally
         const isProduction = window.location.hostname !== "localhost";
-        const redirectURL = isProduction ? "/BudgetPlanner-WT/app.html" : "/app.html";
+        const redirectURL = isProduction ? "/BudgetPlanner-WT/app.html" : "app.html";
         window.location.href = redirectURL;
     }
 });
-// Sign Up User
+// 🔹 Sign Up User
 window.signUpUser = async function() {
     const email = document.getElementById('signupEmail').value;
     const password = document.getElementById('signupPassword').value;
     try {
-        await (0, _auth.createUserWithEmailAndPassword)((0, _firebaseJs.auth), email, password);
-        alert('Sign up successful!');
-        window.location.href = "/app.html"; // Redirect to the main page after sign up
+        const userCredential = await (0, _auth.createUserWithEmailAndPassword)((0, _firebaseJs.auth), email, password);
+        console.log("\u2705 Sign up successful!", userCredential.user);
+        // Redirect to app.html after signup
+        window.location.href = "app.html";
     } catch (error) {
+        console.error("\uD83D\uDD25 Sign-up error:", error);
         alert(`Error: ${error.message}`);
     }
 };
-// Login User
+// 🔹 Login User
 window.loginUser = async function() {
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
     try {
-        await (0, _auth.signInWithEmailAndPassword)((0, _firebaseJs.auth), email, password);
-        alert('Login successful!');
-        window.location.href = "/app.html"; // Redirect after login
+        const userCredential = await (0, _auth.signInWithEmailAndPassword)((0, _firebaseJs.auth), email, password);
+        console.log("\u2705 Login successful!", userCredential.user);
+        // Redirect to app.html after login
+        window.location.href = "app.html";
     } catch (error) {
+        console.error("\uD83D\uDD25 Login error:", error);
         alert(`Error: ${error.message}`);
     }
 };
-// Toggle between Sign Up and Login
+// 🔹 Toggle Login and Sign Up Pages
 window.showLogin = function() {
     document.getElementById('signupPage').style.display = 'none';
     document.getElementById('loginPage').style.display = 'block';

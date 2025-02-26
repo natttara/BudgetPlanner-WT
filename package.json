@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "Budget Planner App",
   "type": "module",
+  "homepage": "https://natttara.github.io/BudgetPlanner-WT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/natttara/BudgetPlanner-WT.git"
   },
   "scripts": {
     "start": "parcel index.html",
-  "build": "parcel build index.html --dist-dir docs --public-url ./",
+    "build": "parcel build index.html --dist-dir docs --public-url ./",
     "build-pages": "parcel build --dist-dir docs --public-url /BudgetPlanner-WT/ src/*.html",
     "dev:build": "parcel build --dist-dir docs --no-content-hash assets/html/*.html",
     "dev:run": "npm run dev:build && npm run dev:start",
